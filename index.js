@@ -125,11 +125,11 @@ function lastLogCheckpoint(req, res) {
                     return "";
                 }
 
-                if (request.auth.user.email) {
-                    return request.auth.user.email;
+                if (request.body) {
+                    return request.body.email;
                 }
 
-                return request.body.email;
+                return;
             };
 
             var user_success_signup_log = function user_success_signup_log(l) {
@@ -351,6 +351,11 @@ function deleteOIEUserData(req, email, ctx, cb) {
 
     console.log('Sending to \'' + url + '\'');
 
+    if(!email) {
+        console.log('Email is empty, delete request cannot build without email');
+        return cb();
+    }
+    
     var log_converter = function log_converter(email) {
         console.log("Create delete signed data for user(" + email + ")");
         var secret = new Buffer(ctx.data.AUTH0_TARGET_APP_CLIENT_SECRET, 'base64').toString('binary');

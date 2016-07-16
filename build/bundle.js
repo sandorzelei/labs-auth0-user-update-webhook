@@ -199,11 +199,11 @@ module.exports =
 	                    return "";
 	                }
 
-	                if (request.auth.user.email) {
-	                    return request.auth.user.email;
+	                if (request.body) {
+	                    return request.body.email;
 	                }
 
-	                return request.body.email;
+	                return;
 	            };
 
 	            var user_success_signup_log = function user_success_signup_log(l) {
@@ -419,6 +419,11 @@ module.exports =
 	    var url = ctx.data.DELETE_USER_WEBHOOK_URL;
 
 	    console.log('Sending to \'' + url + '\'');
+
+	    if (!email) {
+	        console.log('Email is empty, delete request cannot build without email');
+	        return cb();
+	    }
 
 	    var log_converter = function log_converter(email) {
 	        console.log("Create delete signed data for user(" + email + ")");
@@ -1061,8 +1066,8 @@ module.exports =
 
 	module.exports = {
 		"title": "Labs-Auth0 user update webhook",
-		"name": "Labs-auth0-user-webhook-1-12",
-		"version": "1.12.0",
+		"name": "Labs-auth0-user-webhook-1-13",
+		"version": "1.13.0",
 		"author": "OIEngine",
 		"description": "Web hook for updating user profile on Labs side",
 		"type": "cron",
