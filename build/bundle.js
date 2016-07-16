@@ -228,8 +228,12 @@ module.exports =
 
 	            /** *************************** */
 
+	            var fromDate = new Date(new Date() - 5 * 60000);
+
 	            context.logs = context.logs.filter(function (l) {
 	                return l.type === 'sapi' || l.type === 'fapi' || l.type === 'ss';
+	            }).filter(function (l) {
+	                return new Date(l.date) > fromDate;
 	            }).filter(function (l) {
 	                return user_update_log(l) || user_success_signup_log(l) || user_delete_log(l);
 	            }).map(function (l) {
@@ -1057,8 +1061,8 @@ module.exports =
 
 	module.exports = {
 		"title": "Labs-Auth0 user update webhook",
-		"name": "Labs-auth0-user-webhook-1-11",
-		"version": "1.11.0",
+		"name": "Labs-auth0-user-webhook-1-12",
+		"version": "1.12.0",
 		"author": "OIEngine",
 		"description": "Web hook for updating user profile on Labs side",
 		"type": "cron",
