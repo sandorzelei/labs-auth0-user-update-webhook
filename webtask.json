@@ -1,7 +1,7 @@
 {
   "title": "Labs-Auth0 user update webhook",
-  "name": "Labs-auth0-user-webhook-1-13",
-  "version": "1.13.0",
+  "name": "Labs-auth0-user-webhook-1-14",
+  "version": "1.14.0",
   "author": "OIEngine",
   "description": "Web hook for updating user profile on Labs side",
   "type": "cron",
